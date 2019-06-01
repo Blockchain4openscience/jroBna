@@ -45,7 +45,6 @@ async function sampleTransaction(tx) {
 /**
 * Create a research object after it is created
 * Recieve a reward on succesefully create Ro's
-* @fires org.jro.ROJCreationEvent
 * @param {org.jro.Add} createROData
 * @transaction
 */
