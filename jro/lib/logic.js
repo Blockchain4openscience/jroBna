@@ -18,31 +18,6 @@
  */
 
 /**
- * Sample transaction
- * @param {org.jro.SampleTransaction} sampleTransaction
- * @transaction
- */
-async function sampleTransaction(tx) {
-    // Save the old value of the asset.
-    const oldValue = tx.asset.value;
-
-    // Update the asset with the new value.
-    tx.asset.value = tx.newValue;
-
-    // Get the asset registry for the asset.
-    const assetRegistry = await getAssetRegistry('org.jro.SampleAsset');
-    // Update the asset in the asset registry.
-    await assetRegistry.update(tx.asset);
-
-    // Emit an event for the modified asset.
-    let event = getFactory().newEvent('org.jro', 'SampleEvent');
-    event.asset = tx.asset;
-    event.oldValue = oldValue;
-    event.newValue = tx.newValue;
-    emit(event);
-}
-
-/**
 * Create a research object after it is created
 * Recieve a reward on succesefully create Ro's
 * @param {org.jro.Add} createROData
