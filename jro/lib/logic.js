@@ -41,3 +41,28 @@ async function sampleTransaction(tx) {
     event.newValue = tx.newValue;
     emit(event);
 }
+
+/**
+* Create a research object after it is created
+* Recieve a reward on succesefully create Ro's
+* @fires org.jro.ROJCreationEvent
+* @param {org.jro.Add} createROData
+* @transaction
+*/
+async function createResearchOJ(createROData) {
+
+    const factory = getFactory(); 
+    const roj = factory.newResource('org.jro','ROJ',createROData.rojId);
+    roj.node=createROData.node; // Populate the node value in the asset
+    roj.contributors.push(createROData.creator);
+
+    // Update the asset registry
+    let assetRegistry = await getAssetRegistry('org.jro.ROJ');
+    await assetRegistry.add(roj);
+
+    // Update Researcher registry
+    let participantRegistry = await getParticipantRegistry('org.jro.Researcher');
+    await participantRegistry.update(createROData.creator);
+
+}
+
