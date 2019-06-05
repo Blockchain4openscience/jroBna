@@ -18,8 +18,6 @@
  */
 
 /**
-* Create a research object after it is created
-* Recieve a reward on succesefully create Ro's
 * @param {org.jro.Add} createROData
 * @transaction
 */
@@ -28,7 +26,14 @@ async function createResearchOJ(createROData) {
     const factory = getFactory(); 
     const roj = factory.newResource('org.jro','ROJ',createROData.rojId);
     roj.node=createROData.node; // Populate the node value in the asset
-    roj.contributors.push(createROData.creator);
+
+    if (typeof roj.contributors == 'undefined') { // Check if the array is empty
+        roj.contributors = new Array();
+        roj.contributors[0] = createROData.creator;
+    } 
+    else {
+        roj.contributors.push(createROData.creator);
+    }
 
     // Update the asset registry
     let assetRegistry = await getAssetRegistry('org.jro.ROJ');
@@ -38,5 +43,39 @@ async function createResearchOJ(createROData) {
     let participantRegistry = await getParticipantRegistry('org.jro.Researcher');
     await participantRegistry.update(createROData.creator);
 
+}
+
+/**
+* Create a research object after it is created
+* Recieve a reward on succesefully create Ro's
+* @param {org.jro.Enrich} updateROData
+* @transaction
+*/
+async function UpdateResearchOJ(updateROData) {
+    let roj = updateROData.rojId;
+    roj.description = updateROData.description;
+    roj.typeRO = updateROData.typeRO;
+    let contributors = roj.contributors;
+
+    let contributorexists=0;
+    for(let i=0;i<contributors.length;i++){
+        if(contributors[i]==updateROData.creator){
+            contributorexists=1;
+        }
+    }
+    
+    if(contributorexists==0){
+        contributors.push(updateROData.creator);
+    }
+
+    // Update the asset registry
+    let assetRegistry = await getAssetRegistry('org.jro.ROJ');
+    await assetRegistry.update(updateROData.rojId);
+
+    // Update Researcher registry
+    let participantRegistry = await getParticipantRegistry('org.jro.Researcher');
+    await participantRegistry.update(updateROData.creator);
+
+    
 }
 
