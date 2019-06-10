@@ -74,10 +74,11 @@ Create a `ROJ` asset.
 ```json
 {
   "$class": "org.jro.Add",
-  "rojId": "",
-  "node": "",
-  "creator": "resource:org.jro.Researcher#4656"
-}```
+  "rojId": "H.IPFS.ObjectHash",
+  "node": "TestNode",
+  "creator": "resource:org.jro.Researcher#0000-0001-6812-2176"
+}
+```
 
 Unlike the first method, this method generate a wallet event for `0000-0001-6812-2176` that creates the researcher object an assigns as contributor
 
@@ -89,7 +90,7 @@ Submit a `Enrich` transaction:
 ```json
 {
   "$class": "org.jro.Enrich",
-  "rojId": "resource:org.jro.ROJ#Q.IPFS.ObjectHash",
+  "rojId": "resource:org.jro.ROJ#H.IPFS.ObjectHash",
   "typeRO": "notebook",
   "description": "AtlasReader, a Python interface for generating coordinate tables and region labels from statistical MRI images",
   "creator": "resource:org.jro.Researcher#0000-0001-6812-2176"
