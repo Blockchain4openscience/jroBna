@@ -71,7 +71,7 @@ The generated API is connected to the deployed blockchain and business network.
 
 ## Composer Rest Server
 
-Launch your browser and go to the URL given [http://localhost:3000/explorer](http://localhost:3000/explorer) for interacting with it. Rest server generates an endpoint for each participant, asset and transaction of the business network definition. Go to the [business model](https://github.com/Blockchain4openscience/hyperledger/tree/master/bforos2) to review all operations in the rest server. yo can use a api environment tool (e.g. [Postman](https://www.getpostman.com/)) to send Http Request to Hypeledger. 
+Launch your browser and go to the URL given [http://localhost:3000/explorer](http://localhost:3000/explorer) for interacting with it. Rest server generates an endpoint for each participant, asset and transaction of the business network definition. Go to the [business model](https://github.com/Blockchain4openscience/jroBna/tree/master/jro) to review all operations in the rest server. yo can use a api environment tool (e.g. [Postman](https://www.getpostman.com/)) to send Http Request to Hypeledger. 
 
 Additionally you can run hyperledger playground to see easily the changes in the components of the business model. 
 
