@@ -18,6 +18,8 @@
  */
 
 /**
+* Create a research object and emit a WalletEvent on creation.
+* @fires org.jro.WalletEvent
 * @param {org.jro.Add} createROData
 * @transaction
 */
@@ -42,7 +44,13 @@ async function createResearchOJ(createROData) {
     // Update Researcher registry
     let participantRegistry = await getParticipantRegistry('org.jro.Researcher');
     await participantRegistry.update(createROData.creator);
-
+    
+    let event = getFactory().newEvent('org.jro','WalletEvent');
+    event.claimer = createROData.creator;
+    const balance = createROData.creator.wallet;
+    event.oldBalance = balance;
+    event.newBalance = balance + roj.reward; // This needs to be verified!
+    emit(event);
 }
 
 /**
