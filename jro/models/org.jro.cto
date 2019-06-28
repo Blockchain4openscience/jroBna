@@ -32,7 +32,7 @@ participant Researcher identified by researcherId {
   o String researcherId
   o String email
   o String name
-  o String ipfsId
+  o String ipfsId optional
   o afiliation institution
   o Boolean correspAuth default = true
   o Integer wallet default = 10

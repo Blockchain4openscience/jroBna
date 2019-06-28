@@ -3,7 +3,7 @@
     "composer": "^0.20.0"
   },
   "name": "jro",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "journal of research objects",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/jro.bna",

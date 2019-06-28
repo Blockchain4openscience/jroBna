@@ -83,6 +83,14 @@ Create a `ROJ` asset.
 Unlike the first method, this method generate a wallet event for `0000-0001-6812-2176` that creates the researcher object an assigns as contributor
 
 ```json
+{
+ "$class": "org.jro.WalletEvent",
+ "claimer": "resource:org.jro.Researcher#0000-0001-6812-2176",
+ "oldBalance": 10,
+ "newBalance": 11,
+ "eventId": "33919cd7-6097-44fe-b7de-62838156f966#0",
+ "timestamp": "2019-06-27T23:49:18.421Z"
+}
 ```
 
 Submit a `Enrich` transaction:
@@ -97,9 +105,15 @@ Submit a `Enrich` transaction:
 }
 ```
 
-This transaction has registered ... the research objet; additionally it rewards x points to `0000-0001-6812-2176`. This reward will be reflected in the new state of his wallet; the change in the state of the wallet is recorded as an event.
+This transaction has registered ... the research objet; additionally it rewards 1 point to `0000-0001-6812-2176`. This reward will be reflected in the new state of his wallet; the change in the state of the wallet is recorded as an event.
 
 ```json
 {
+ "$class": "org.jro.WalletEvent",
+ "claimer": "resource:org.jro.Researcher#0000-0001-6812-2176",
+ "oldBalance": 11,
+ "newBalance": 12,
+ "eventId": "f4d7d6b1-f6c5-4ecc-8f52-4fe1b37040e5#0",
+ "timestamp": "2019-06-27T23:57:08.121Z"
 }
 ```
