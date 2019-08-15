@@ -67,6 +67,10 @@ composer-rest-server
 5. Select __Yes__ when asked whether to enable event publication.
 6. Select __No__ when asked whether to enable TLS security.
 
+```
+composer-rest-server -c admin@jro -n never -w true
+```
+
 The generated API is connected to the deployed blockchain and business network.
 
 ## Composer Rest Server
