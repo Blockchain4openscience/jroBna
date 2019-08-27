@@ -23,10 +23,16 @@ For the next steps you must have the name of the __PeerAdmin__ card created in p
 
 Deploying a business network to the Hyperledger Fabric requires the Hyperledger Composer business network to be installed on the peer, then the business network can be started, and a new participant, identity, and associated card must be created to be the network administrator. Finally, the network administrator business network card must be imported for use, and the network can then be pinged to check it is responding.
 
+
+0. import the business network card for the Hyperledger Fabric administrator,
+`````
+composer card import -f PeerAdmin@fabric-network.card
+`````
+
 1. To install the business network:
 
 ```
-composer network install --card PeerAdmin@hlfv1 --archiveFile jro@0.0.1.bna
+composer network install --card PeerAdmin@fabric-network --archiveFile jro@0.0.3.bna
 ```
 
 If __PeerAdmin__ card name is different to PeerAdmin@hlfv1 replace this value
@@ -34,7 +40,7 @@ If __PeerAdmin__ card name is different to PeerAdmin@hlfv1 replace this value
 2. To start the business network:
 
 ```
-composer network start --networkName jro --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 
+composer network start --networkName jro --networkVersion 0.0.3 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@fabric-network 
 ```
 
 This command generate a file for the admin network card __admin@jro.card__ 
@@ -67,6 +73,8 @@ composer-rest-server
 5. Select __Yes__ when asked whether to enable event publication.
 6. Select __No__ when asked whether to enable TLS security.
 
+or just type the following command
+
 ```
 composer-rest-server -c admin@jro -n never -w true
 ```
@@ -82,3 +90,28 @@ Additionally you can run hyperledger playground to see easily the changes in the
 ```
 composer-playground
 ```
+
+## Destroy a previous set up
+After testing the bna desgined with Composer and deployed onto Fabric it is important to tidy up by stopping fabric. Navigate to the folder where you initially started the Hyperledger Fabric network.
+
+`````
+./stopFabric.sh
+./teardownFabric.sh
+`````
+delete the composer cards
+`````
+composer card delete -c name
+`````
+delete the file sytem card store
+`````
+rm -fr ~/.composer
+`````
+and clear the docker cointainers.
+
+`````
+./teardownAllDocker.sh
+`````
+Select option 1- Kill and remove only the containers. Then delete the images created, 
+`````
+docker rmi $(docker images dev-* -q)
+`````
